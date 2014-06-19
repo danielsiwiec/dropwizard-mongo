@@ -2,6 +2,7 @@ package resources.patient;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.yammer.metrics.annotation.Timed;
 import model.Patient;
 import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.JacksonDBCollection;
@@ -24,6 +25,7 @@ public class PatientResource {
 
     @GET
     @Path("/{id}")
+    @Timed
     public Patient getPatient(@PathParam("id") String id) {
         DBCursor<Patient> cursor = patients.find().is("data.patientId", id);
         notFoundIfNull(cursor);
